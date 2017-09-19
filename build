@@ -1,0 +1,5 @@
+#!/bin/sh
+
+docker build --no-cache -t imqs-ubuntu-base .
+docker tag imqs-ubuntu-base bismarck:5000/imqs-ubuntu-base
+docker push bismarck:5000/imqs-ubuntu-base
