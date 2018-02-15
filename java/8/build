@@ -1,0 +1,4 @@
+#!/bin/sh
+
+docker build -t imqs/java-base:8 .
+docker push imqs/java-base:8
