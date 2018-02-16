@@ -1,0 +1,4 @@
+#!/bin/sh
+
+docker build -t imqs/nodejs:8 .
+docker push imqs/nodejs:8
