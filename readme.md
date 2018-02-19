@@ -1,6 +1,6 @@
-IMQS Ubuntu Docker Base Image
-=============================
+IMQS Ubuntu Docker Base Image & Sub Images
+===========================================
 
-This is built once a week, to make sure that our base Ubuntu image has the latest security patches installed.
+The base image is built once a week, to make sure that our base Ubuntu image has the latest security patches installed.
 
-If you're building an image based on Ubuntu, then use this as your base. It is pushed to bismarck:5000/imqs-ubuntu-base.
+If you're building an image based on Ubuntu, then use this as your base.
