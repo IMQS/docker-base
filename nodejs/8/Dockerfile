@@ -2,14 +2,12 @@ FROM imqs/ubuntu-base
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get update \
-	&& apt-get install nodejs bzip2 openjdk-8-jre -y
+	&& apt-get install nodejs bzip2 openjdk-8-jre git gcc -y
 
-# RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN npm config set user 0
-RUN npm config set unsafe-perm true
+# We need go to build www server
+RUN curl -O https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz
+RUN tar -xvf go1.8.linux-amd64.tar.gz
+RUN mv go /usr/local
+ENV PATH /usr/local/go/bin:$PATH
 
-
-RUN npm install -g phantomjs-prebuilt istanbul \
-	remap-istanbul typescript@2.3.4 tslint@5.2.0 \
-	svgo@0.7.2 node-sass mkdirp ncp marked@0.3.12
 
