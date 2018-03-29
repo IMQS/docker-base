@@ -1,5 +1,4 @@
 #!/bin/sh
 
-docker build --no-cache -t ubuntu-base .
-docker tag ubuntu-base imqs/ubuntu-base
+docker build --no-cache -t imqs/ubuntu-base .
 docker push imqs/ubuntu-base
