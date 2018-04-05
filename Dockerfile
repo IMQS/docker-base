@@ -4,6 +4,7 @@ RUN  apt-get update \
   && apt-get dist-upgrade -y 
 RUN apt-get install curl -y
 RUN apt-get install postgresql-client -y
+RUN apt-get install iputils-ping -y
 
 RUN mkdir -p /var/log/imqs
 
