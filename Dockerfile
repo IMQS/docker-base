@@ -5,6 +5,7 @@ RUN  apt-get update \
 RUN apt-get install curl -y
 RUN apt-get install postgresql-client -y
 RUN apt-get install iputils-ping -y
+RUN apt-get install netcat -y
 
 RUN mkdir -p /var/log/imqs
 
