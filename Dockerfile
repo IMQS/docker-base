@@ -1,7 +1,7 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 RUN  apt-get update \
-  && apt-get dist-upgrade -y 
+	&& apt-get dist-upgrade -y
 RUN apt-get install curl -y
 RUN apt-get install postgresql-client -y
 RUN apt-get install iputils-ping -y
@@ -13,4 +13,3 @@ RUN mkdir -p /var/log/imqs
 COPY wait-for-nc.sh /usr/bin
 # Tool to wait for postgres to accept connections
 COPY wait-for-postgres.sh /usr/bin
-
