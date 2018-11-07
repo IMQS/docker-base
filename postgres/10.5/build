@@ -1,0 +1,5 @@
+#!/bin/sh
+
+docker build -t postgres:10.5 .
+docker tag postgres:10.5 imqs/postgres:10.5
+docker push imqs/postgres:10.5
