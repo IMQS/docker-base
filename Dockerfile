@@ -1,11 +1,13 @@
 FROM ubuntu:18.04
 
 RUN  apt-get update \
-  && apt-get dist-upgrade -y
-RUN apt-get install curl -y
-RUN apt-get install postgresql-client -y
-RUN apt-get install iputils-ping -y
-RUN apt-get install netcat -y
+  && apt-get dist-upgrade -y \
+  && apt-get install -y \
+  curl \
+  iputils-ping \
+  netcat \
+  postgresql-client \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/log/imqs
 
