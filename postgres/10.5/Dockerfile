@@ -5,3 +5,5 @@ FROM postgres:10.5
 
 RUN apt-get update
 RUN apt-get install -y postgis postgresql-10-postgis-2.4
+COPY initdb /docker-entrypoint-initdb.d
+
