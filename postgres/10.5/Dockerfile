@@ -1,9 +1,9 @@
-# WARNING! Do not place any sensative infomration in this file (e.g. Postgres passwords).
-# The image repo on Dockerhub for this is public. If you absolutely have to, then make
-# the repo private.
 FROM postgres:10.5
 
 RUN apt-get update
 RUN apt-get install -y postgis postgresql-10-postgis-2.4
-COPY initdb /docker-entrypoint-initdb.d
 
+COPY initdb /docker-entrypoint-initdb.d
+RUN chmod 755 /docker-entrypoint-initdb.d/01-init.sh
+RUN chmod 755 /docker-entrypoint-initdb.d/02-postgres-config-updater.sh 
+RUN chmod 755 /docker-entrypoint-initdb.d/03-postgres-replication-starter.sh
