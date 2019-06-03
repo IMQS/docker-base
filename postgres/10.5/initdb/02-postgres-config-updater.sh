@@ -28,3 +28,7 @@ fi
 if [[  -n "$REPLICATION_USER" ]]; then
     echo "host replication $REPLICATION_USER 0.0.0.0/0 trust" >> "$PGDATA/pg_hba.conf"
 fi
+
+if [[  -n "$SYNCHRONOUS_COMMIT" ]]; then
+    echo "synchronous_commit = $SYNCHRONOUS_COMMIT" >> "$PGDATA/pg_hba.conf"
+fi
