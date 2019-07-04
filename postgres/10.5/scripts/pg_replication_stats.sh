@@ -8,7 +8,6 @@ DOCKER_SERVICENAME=`printenv DOCKER_SERVICENAME`
 # only send metrics if Datadog is running (i.e. dsd.socket exists)
 if [[ -e $DSD_FILE ]]; then
     r_outgoing=`pgmetrics -h localhost -U postgres -w --no-pager -f json | jq '.replication_outgoing[0]'`
-    received_lsn=`pgmetrics -h localhost -U postgres -w --no-pager -f json | jq '.last_wal_receive_lsn'`
     if [[ r_outgoing != 'null' ]]; then
 	# must be master send outgoing stats, we only send master
 	# first do lsn metics as counters
@@ -23,7 +22,7 @@ if [[ -e $DSD_FILE ]]; then
           value=`echo "$value" | tr -d /`
           value=$((16#$value))	# convert from Hex to integer
           lag=$((sent_lsn - value)) # data lag is determined by this difference
-          string=`printf "postgres.replication.master.lag.data.%s:%d|c|#com.docker.stack.namespace:%s,com.docker.swarm.service.name:%s" $i $lag $DOCKER_NAMESPACE $DOCKER_SERVICENAME`
+          string=`printf "postgres.replication.master.lag.data.%s:%d|g|#com.docker.stack.namespace:%s,com.docker.swarm.service.name:%s" $i $lag $DOCKER_NAMESPACE $DOCKER_SERVICENAME`
           echo -n $string | nc -U -u -w1 /var/run/datadog/dsd.socket
         done
 
