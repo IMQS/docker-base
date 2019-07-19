@@ -1,0 +1,4 @@
+./h2-data
+./docker-compose.yml
+./Dockerfile
+./.dockerignore

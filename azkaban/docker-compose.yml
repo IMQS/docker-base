@@ -1,0 +1,10 @@
+version: '3.4'
+services:
+  azkaban:
+    volumes:
+      - ${PWD}/h2-data:/azkaban/h2-data
+      - /var/run/docker.sock:/var/run/docker.sock
+    build: .
+    ports:
+        - 8001:8081
+
