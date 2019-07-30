@@ -6,5 +6,5 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     build: .
     ports:
-        - 8001:8081
+        - 8001:80
 
