@@ -3,6 +3,10 @@ set -e
 
 echo [*] configuring $REPLICATION_ROLE instance
 
+###########################################################################################
+## postgresql.conf
+###########################################################################################
+
 if [[ -n "$MAX_CONNECTIONS" ]]; then
     echo "max_connections = $MAX_CONNECTIONS" >> "$PGDATA/postgresql.conf"
 fi
@@ -25,10 +29,15 @@ if [[ -n "$MAX_REPLICATION_SLOTS" ]]; then
     echo "max_replication_slots = $MAX_REPLICATION_SLOTS" >> "$PGDATA/postgresql.conf"
 fi
 
+if [[  -n "$SYNCHRONOUS_COMMIT" ]]; then
+    echo "synchronous_commit = $SYNCHRONOUS_COMMIT" >> "$PGDATA/postgresql.conf"
+fi
+
+###########################################################################################
+## pg_hba.conf
+###########################################################################################
+
 if [[  -n "$REPLICATION_USER" ]]; then
     echo "host replication $REPLICATION_USER 0.0.0.0/0 trust" >> "$PGDATA/pg_hba.conf"
 fi
 
-if [[  -n "$SYNCHRONOUS_COMMIT" ]]; then
-    echo "synchronous_commit = $SYNCHRONOUS_COMMIT" >> "$PGDATA/pg_hba.conf"
-fi
