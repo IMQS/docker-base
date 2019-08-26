@@ -1,4 +1,4 @@
-# docker build -t imqs/postgres-qa:10.5 postgres/qa-10.5
+# docker build -t imqs/postgres:qa-10.5 postgres/qa-10.5
 FROM postgres:10.5
 
 RUN apt-get update
