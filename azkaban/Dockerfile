@@ -1,5 +1,7 @@
 FROM imqs/java-base:8
 
+RUN apt-get install zstd -y
+
 # Allow Azkaban to perform Docker tasks
 ENV DOCKERVERSION=18.09.3
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
