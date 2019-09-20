@@ -1,7 +1,11 @@
 FROM postgres:10.5
 
-RUN apt-get update
-RUN apt-get install -y postgis postgresql-10-postgis-2.4 jq netcat-openbsd cron
+RUN apt-get update --fix-missing
+RUN apt-get install -y postgis postgresql-10-postgis-2.4 jq netcat-openbsd cron locales locales-all
+
+ENV LC_ALL en_ZA.utf8
+ENV LANG en_ZA.utf8
+ENV LANGUAGE en_ZA.utf8
 
 COPY initdb /docker-entrypoint-initdb.d
 RUN chmod 755 /docker-entrypoint-initdb.d/01-init.sh
