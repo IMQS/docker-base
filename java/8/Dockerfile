@@ -5,8 +5,13 @@ FROM imqs/ubuntu-base
 RUN apt update && \
 	apt install -y \
 		openjdk-8-jre \
-		maven && \
 	rm -rf /var/lib/apt/lists/*
+
+RUN wget https://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz -P /tmp && \
+	tar xf /tmp/apache-maven-*.tar.gz -C /opt && rm /tmp/apache-maven-*.tar.gz && \
+	mv /opt/apache-maven-* /opt/maven
+ENV MAVEN_HOME=/opt/maven
+ENV PATH=${MAVEN_HOME}/bin:${PATH}
 
 ARG Maven_Nexus_User
 ARG Maven_Releases_Deployment
