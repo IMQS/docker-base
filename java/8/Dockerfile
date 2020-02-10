@@ -1,4 +1,4 @@
-# docker build -t imqs/java-base:8 .
+# docker build -t imqs/java-base:8-test --build-arg Maven_Nexus_User=$Maven_Nexus_User --build-arg Maven_Releases_Deployment=$Maven_Releases_Deployment --build-arg Maven_Snapshots_Deployment=$Maven_Snapshots_Deployment --build-arg Maven_Github_gerhardvanwyk=$Maven_Github_gerhardvanwyk .
 
 FROM imqs/ubuntu-base
 
@@ -8,8 +8,12 @@ RUN apt update && \
 		maven && \
 	rm -rf /var/lib/apt/lists/*
 
+ARG Maven_Nexus_User
+ARG Maven_Releases_Deployment
+ARG Maven_Snapshots_Deployment
+ARG Maven_Github_gerhardvanwyk
 RUN mkdir -p /root/.m2
-RUN echo $'<settings> \
+RUN echo "<settings> \
     <mirrors> \
         <mirror> \
             <!--This sends everything else to /public --> \
@@ -68,8 +72,7 @@ RUN echo $'<settings> \
             <password>$Maven_Github_gerhardvanwyk</password> \
         </server> \
     </servers> \
-</settings>' > /root/.m2/settings.xml
-
+</settings>" > /root/.m2/settings.xml
 
 # Create a symlink to the real log directory
 RUN mkdir -p /imqsvar
