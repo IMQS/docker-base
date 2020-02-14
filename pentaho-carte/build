@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker build -t imqs/pentaho-carte .
-docker push imqs/pentaho-carte
+docker build -t imqs/pentaho-carte-base .
+docker push imqs/pentaho-carte-base
