@@ -2,4 +2,3 @@
 
 docker build -t imqs/newman .
 docker push imqs/newman
-
