@@ -11,11 +11,13 @@ RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | \
 	git clone https://github.com/pramsey/pgsql-http.git && \
 	cd pgsql-http && \
 	ln -s /usr/include/postgresql/10 /usr/include/postgresql/12 && \
+	rm -rf /usr/lib/postgresql/12 && \
 	ln -s /usr/lib/postgresql/10 /usr/lib/postgresql/12 && \
+	rm -rf /usr/share/postgresql/12 && \
 	ln -s /usr/share/postgresql/10 /usr/share/postgresql/12 && \
 	make && \
 	make install && \
-	apt-get remove -y postgresql-server-dev-10 libcurl4-openssl-dev git \
+	apt-get remove -y postgresql-server-dev-10 git \
 					  build-essential make clang-6.0 && \
 	apt-get -y autoremove
 
