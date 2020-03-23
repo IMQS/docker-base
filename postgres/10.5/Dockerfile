@@ -1,15 +1,22 @@
 FROM postgres:10.5
 
-RUN apt-get update --fix-missing
-RUN apt-get install -y postgis postgresql-10-postgis-2.4 jq netcat-openbsd cron locales locales-all
-RUN apt-get install -y postgresql-server-dev-10 libcurl4-openssl-dev git build-essential make
-RUN git clone https://github.com/pramsey/pgsql-http.git
-RUN cd pgsql-http && \
-sed -i "s/CFLAGS += $(shell $(CURL_CONFIG) --cflags)/&\nCFLAGS += -I/usr/include/postgresql/10/server/g" Makefile && \
-make && \
-make install
-RUN apt-get remove -y postgresql-server-dev-10 libcurl4-openssl-dev git build-essential make
-RUN apt-get autoremove
+# Install dependencies and remove build dependencies
+RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | \
+	tee /etc/apt/sources.list.d/backports.list && \
+	apt-get update --fix-missing && \
+	apt-get install -y postgis postgresql-10-postgis-2.4 jq netcat-openbsd \
+					   cron locales locales-all \
+					   postgresql-server-dev-10 libcurl4-openssl-dev \
+					   git build-essential make clang-6.0 && \
+	git clone https://github.com/pramsey/pgsql-http.git && \
+	cd pgsql-http && \
+	ln -s /usr/include/postgresql/10 /usr/include/postgresql/12 && \
+	make && \
+	make install && \
+	apt-get remove -y postgresql-server-dev-10 libcurl4-openssl-dev git \
+					  build-essential make clang && \
+	apt-get -y autoremove
+
 ENV LC_ALL en_ZA.utf8
 ENV LANG en_ZA.utf8
 ENV LANGUAGE en_ZA.utf8
