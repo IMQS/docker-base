@@ -25,7 +25,7 @@ RUN echo "<settings> \
             <!--This sends everything else to /public --> \
             <id>nexus</id> \
             <mirrorOf>*</mirrorOf> \
-            <url>http://dogmatix:8081/nexus/content/groups/public</url> \
+            <url>http://192.168.4.40:8081/nexus/content/groups/public</url> \
         </mirror> \
     </mirrors> \
     <profiles> \
