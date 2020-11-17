@@ -20,64 +20,64 @@ ARG Maven_Snapshots_Deployment
 ARG Maven_Github_gerhardvanwyk
 RUN mkdir -p /root/.m2
 RUN echo "<settings> \
-    <mirrors> \
-        <mirror> \
-            <!--This sends everything else to /public --> \
-            <id>nexus</id> \
-            <mirrorOf>*</mirrorOf> \
-            <url>http://192.168.4.40:8081/nexus/content/groups/public</url> \
-        </mirror> \
-    </mirrors> \
-    <profiles> \
-        <profile> \
-            <id>nexus</id> \
-            <!--Enable snapshots for the built in central repo to direct --> \
-            <!--all requests to nexus via the mirror --> \
-            <repositories> \
-                <repository> \
-                    <id>central</id> \
-                    <url>http://central</url> \
-                    <releases><enabled>true</enabled></releases> \
-                    <snapshots><enabled>true</enabled></snapshots> \
-                </repository> \
-            </repositories> \
-            <pluginRepositories> \
-                <pluginRepository> \
-                    <id>central</id> \
-                    <url>http://central</url> \
-                    <releases><enabled>true</enabled></releases> \
-                    <snapshots><enabled>true</enabled></snapshots> \
-                </pluginRepository> \
-            </pluginRepositories> \
-        </profile> \
-    </profiles> \
-    <activeProfiles> \
-        <!--make the profile active all the time --> \
-        <activeProfile>nexus</activeProfile> \
-    </activeProfiles> \
- \
-    <servers> \
-        <server> \
-            <id>nexus</id> \
-            <username>user</username> \
-            <password>$Maven_Nexus_User</password> \
-        </server> \
-        <server> \
-            <id>releases</id> \
-            <username>deployment</username> \
-            <password>$Maven_Releases_Deployment</password> \
-        </server> \
-        <server> \
-            <id>snapshots</id> \
-            <username>deployment</username> \
-            <password>$Maven_Snapshots_Deployment</password> \
-        </server> \
-        <server> \
-            <id>github</id> \
-            <username>gerhardvanwyk</username> \
-            <password>$Maven_Github_gerhardvanwyk</password> \
-        </server> \
-    </servers> \
+  <mirrors> \
+      <mirror> \
+          <!--This sends everything else to /public --> \
+          <id>nexus</id> \
+          <mirrorOf>*</mirrorOf> \
+          <url>http://nexus.imqs.co.za:8081/nexus/content/groups/public</url> \
+      </mirror> \
+  </mirrors> \
+  <profiles> \
+      <profile> \
+          <id>nexus</id> \
+          <!--Enable snapshots for the built in central repo to direct --> \
+          <!--all requests to nexus via the mirror --> \
+          <repositories> \
+              <repository> \
+                  <id>central</id> \
+                  <url>http://central</url> \
+                  <releases><enabled>true</enabled></releases> \
+                  <snapshots><enabled>true</enabled></snapshots> \
+              </repository> \
+          </repositories> \
+          <pluginRepositories> \
+              <pluginRepository> \
+                  <id>central</id> \
+                  <url>http://central</url> \
+                  <releases><enabled>true</enabled></releases> \
+                  <snapshots><enabled>true</enabled></snapshots> \
+              </pluginRepository> \
+          </pluginRepositories> \
+      </profile> \
+  </profiles> \
+  <activeProfiles> \
+      <!--make the profile active all the time --> \
+      <activeProfile>nexus</activeProfile> \
+  </activeProfiles> \
+\
+  <servers> \
+      <server> \
+          <id>nexus</id> \
+          <username>user</username> \
+          <password>$Maven_Nexus_User</password> \
+      </server> \
+      <server> \
+          <id>releases</id> \
+          <username>deployment</username> \
+          <password>$Maven_Releases_Deployment</password> \
+      </server> \
+      <server> \
+          <id>snapshots</id> \
+          <username>deployment</username> \
+          <password>$Maven_Snapshots_Deployment</password> \
+      </server> \
+      <server> \
+          <id>github</id> \
+          <username>gerhardvanwyk</username> \
+          <password>$Maven_Github_gerhardvanwyk</password> \
+      </server> \
+  </servers> \
 </settings>" > /root/.m2/settings.xml
 
 # Create a symlink to the real log directory
