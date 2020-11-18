@@ -5,8 +5,8 @@ FROM imqs/ubuntu-base
 RUN apt update && \
 	apt install -y \
 		openjdk-8-jdk \
-		wget && \
 		jq \
+		wget && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN wget https://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz -P /tmp && \
