@@ -17,10 +17,17 @@ if [[ $1 =~ $isport ]]; then
 fi
 cmd="$@"
 
-until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -p "$port" -U "postgres" -c '\q'; do
-  >&2 echo "Postgres is unavailable on $host:$port - sleeping"
-  sleep 1
-done
+if [ -z "$WAIT_FOR_POSTGRES" ]; then
+  if [ "$WAIT_FOR_POSTGRES" == "true" ] ||
+     [ "$WAIT_FOR_POSTGRES" == "True" ] ||
+	 [ "$WAIT_FOR_POSTGRES" == "TRUE" ] ||
+	 [ "$WAIT_FOR_POSTGRES" == "1" ];then
+    until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -p "$port" -U "postgres" -c '\q'; do
+      >&2 echo "Postgres is unavailable on $host:$port - sleeping"
+      sleep 1
+    done
+  fi
+fi
 
 >&2 echo "Postgres is available at $host:$port - proceeding"
 exec $cmd
