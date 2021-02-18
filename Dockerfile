@@ -1,6 +1,7 @@
-# docker build -t imqs/ubuntu-base .
+# docker build -t imqs/ubuntu-base --build-arg BRANCH=18.04 .
 
-FROM ubuntu:18.04
+ARG BRANCH=BRANCH
+FROM ubuntu:$BRANCH
 
 RUN  apt-get update \
   && apt-get dist-upgrade -y \
