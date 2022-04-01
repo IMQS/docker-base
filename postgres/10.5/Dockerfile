@@ -21,9 +21,6 @@ RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | \
 					  build-essential make clang-6.0 && \
 	apt-get -y autoremove
 
-ENV LC_ALL en_ZA.utf8
-ENV LANG en_ZA.utf8
-ENV LANGUAGE en_ZA.utf8
 ENV MAX_CONNECTIONS 300
 
 COPY initdb /docker-entrypoint-initdb.d
