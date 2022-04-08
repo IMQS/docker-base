@@ -4,7 +4,8 @@ FROM postgres:10.5
 RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | \
 	tee /etc/apt/sources.list.d/backports.list && \
 	apt-get update --fix-missing && \
-	apt-get install -y postgis postgresql-10-postgis-2.4 jq netcat-openbsd \
+	apt-get install -y postgis postgresql-10-postgis-2.4 postgresql-10-postgis-3 \
+					   jq netcat-openbsd \
 					   cron locales locales-all \
 					   postgresql-server-dev-10 libcurl4-openssl-dev \
 					   git build-essential make clang-6.0 && \
