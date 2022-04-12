@@ -1,10 +1,12 @@
+# sudo docker build -t imqs/postgres:10.5 .
+
 FROM postgres:10.5
 
 # Install dependencies and remove build dependencies
 RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | \
 	tee /etc/apt/sources.list.d/backports.list && \
 	apt-get update --fix-missing && \
-	apt-get install -y postgis postgresql-10-postgis-2.4 postgresql-10-postgis-3 \
+	apt-get install -y postgis postgresql-10-postgis-2.4 postgresql-10-postgis-2.5 postgresql-10-postgis-3 \
 					   jq netcat-openbsd \
 					   cron locales locales-all \
 					   postgresql-server-dev-10 libcurl4-openssl-dev \

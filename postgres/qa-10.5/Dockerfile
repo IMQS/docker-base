@@ -1,8 +1,9 @@
 # docker build -t imqs/postgres:qa-10.5 postgres/qa-10.5
+
 FROM postgres:10.5
 
 RUN apt-get update
-RUN apt-get install -y postgis postgresql-10-postgis-2.4 postgresql-10-postgis-3 \
+RUN apt-get install -y postgis postgresql-10-postgis-2.4 postgresql-10-postgis-2.5 postgresql-10-postgis-3 \
 					   jq netcat-openbsd cron
 
 COPY initdb /docker-entrypoint-initdb.d
