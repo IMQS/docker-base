@@ -1,0 +1,4 @@
+#!/bin/sh
+
+docker build -t imqs/postgres:14 .
+docker push imqs/postgres:14
