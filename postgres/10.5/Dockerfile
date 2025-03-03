@@ -41,5 +41,7 @@ RUN mkdir -p /etc/cron.d
 ADD crons/ /etc/cron.d/
 RUN chmod -R 0644 /etc/cron.d
 
+HEALTHCHECK --interval=5s --timeout=5s --retries=5 CMD pg_isready -U postgres
+
 # enable cron as a sevice
 RUN update-rc.d cron defaults

@@ -8,5 +8,7 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/*
 
 COPY initdb /docker-entrypoint-initdb.d
-RUN chmod 755 /docker-entrypoint-initdb.d/01-postgres-config.sh 
+RUN chmod 755 /docker-entrypoint-initdb.d/01-postgres-config.sh
 RUN chmod 755 /docker-entrypoint-initdb.d/02-init.sh
+
+HEALTHCHECK --interval=5s --timeout=5s --retries=5 CMD pg_isready -U postgres
