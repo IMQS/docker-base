@@ -46,10 +46,15 @@ fi
 
 cmd="$@"
 
+user="postgres"
+if [ -n "$POSTGRES_USER" ]
+    user=$POSTGRES_USER
+fi
+
 if [ -z "$WAIT_FOR_POSTGRES" ] || ([ -n "$WAIT_FOR_POSTGRES" ] &&
         ([ "$WAIT_FOR_POSTGRES" == "true" ] || [ "$WAIT_FOR_POSTGRES" == "True" ] || [ "$WAIT_FOR_POSTGRES" == "TRUE" ] || [ "$WAIT_FOR_POSTGRES" == "1" ])) ; then
   >&2 echo "WAIT_FOR_POSTGRES unset, or set to true, waiting..."
-  until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -p "$port" -U "postgres" -c '\q'; do
+  until PGPASSWORD=$POSTGRES_PASSWORD psql -h "$host" -p "$port" -U "$user" -c '\q'; do
     >&2 echo "Postgres is unavailable on $host:$port - sleeping"
     sleep 1
   done
