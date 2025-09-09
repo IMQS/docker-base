@@ -1,6 +1,6 @@
 # docker build -t imqs/ubuntu-base --build-arg BRANCH=18.04 .
 
-ARG BRANCH=BRANCH
+ARG BRANCH=20.04
 FROM ubuntu:$BRANCH
 
 RUN  apt-get update \
@@ -10,6 +10,7 @@ RUN  apt-get update \
   iputils-ping \
   netcat \
   postgresql-client \
+  locales \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/log/imqs

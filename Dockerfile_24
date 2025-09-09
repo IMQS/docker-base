@@ -1,6 +1,6 @@
-# docker build -t imqs/ubuntu-base --build-arg BRANCH=24.04 .
+# docker build -t imqs/ubuntu-base --build-arg BRANCH=24.04 -f Dockerfile_24 .
 
-ARG BRANCH=BRANCH
+ARG BRANCH="24.04"
 FROM ubuntu:$BRANCH
 
 RUN  apt-get update \
@@ -10,6 +10,7 @@ RUN  apt-get update \
   iputils-ping \
   netcat-traditional \
   postgresql-client \
+  locales \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/log/imqs
