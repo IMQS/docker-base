@@ -1,0 +1,22 @@
+# docker build -t imqs/java-base:8-test .
+
+FROM imqs/ubuntu-base
+
+RUN apt update && \
+	apt install -y \
+		openjdk-8-jdk \
+		wget && \
+	rm -rf /var/lib/apt/lists/*
+
+RUN wget https://www-us.apache.org/dist/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz -P /tmp && \
+	tar xf /tmp/apache-maven-*.tar.gz -C /opt && rm /tmp/apache-maven-*.tar.gz && \
+	mv /opt/apache-maven-* /opt/maven
+ENV MAVEN_HOME=/opt/maven
+ENV PATH=${MAVEN_HOME}/bin:${PATH}
+
+RUN mkdir -p /root/.m2
+COPY ./ /root/.m2
+
+# Create a symlink to the real log directory
+RUN mkdir -p /imqsvar
+RUN ln -s /var/log/imqs /imqsvar/logs
