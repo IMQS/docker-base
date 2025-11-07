@@ -7,7 +7,7 @@ RUN apt-get update && \
 					   jq netcat-openbsd cron && \
 	rm -rf /var/lib/apt/lists/*
 
-ENV MAX_CONNECTIONS 300
+ENV MAX_CONNECTIONS=300
 
 COPY initdb /docker-entrypoint-initdb.d
 RUN chmod 755 /docker-entrypoint-initdb.d/01-postgres-config.sh

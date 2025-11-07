@@ -24,7 +24,7 @@ RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | \
 					  build-essential make clang-6.0 && \
 	apt-get -y autoremove
 
-ENV MAX_CONNECTIONS 300
+ENV MAX_CONNECTIONS=300
 
 COPY initdb /docker-entrypoint-initdb.d
 RUN chmod 755 /docker-entrypoint-initdb.d/01-init.sh
