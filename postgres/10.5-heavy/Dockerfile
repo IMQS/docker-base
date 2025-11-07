@@ -22,7 +22,10 @@ RUN echo "deb http://ftp.debian.org/debian stretch-backports main" | \
 	make install && \
 	apt-get remove -y postgresql-server-dev-10 git \
 					  build-essential make clang-6.0 && \
-	apt-get -y autoremove
+	apt-get -y autoremove && \
+	rm -rf /var/lib/apt/lists/*
+
+ENV MAX_CONNECTIONS=300
 
 COPY initdb /docker-entrypoint-initdb.d
 RUN chmod 755 /docker-entrypoint-initdb.d/01-init.sh
