@@ -1,6 +1,6 @@
 # docker build -t imqs/ubuntu-base --build-arg BRANCH=18.04 .
 
-ARG BRANCH=20.04
+ARG BRANCH="20.04"
 FROM ubuntu:$BRANCH
 
 RUN  apt-get update \

@@ -6,3 +6,7 @@ echo "max_wal_senders = 0" >> "$PGDATA/postgresql.conf"
 echo "fsync = off" >> "$PGDATA/postgresql.conf"
 echo "synchronous_commit = off" >> "$PGDATA/postgresql.conf"
 echo "full_page_writes = off" >> "$PGDATA/postgresql.conf"
+
+if [[ -n "$MAX_CONNECTIONS" ]]; then
+	echo "max_connections = $MAX_CONNECTIONS" >> "$PGDATA/postgresql.conf"
+fi
