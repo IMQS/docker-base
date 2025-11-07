@@ -1,8 +1,9 @@
 # docker build -t imqs/postgres:qa-11 .
 FROM postgres:11
 
-RUN apt-get update
-RUN apt-get install -y postgis postgresql-11-postgis-3 jq netcat-openbsd cron
+RUN apt-get update && \
+	apt-get install -y postgis postgresql-11-postgis-3 jq netcat-openbsd cron && \
+	rm -rf /var/lib/apt/lists/*
 
 ENV MAX_CONNECTIONS=300
 
