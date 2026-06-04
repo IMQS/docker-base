@@ -1,6 +1,1 @@
-dockerfileDir=${PWD}
-
-cd /home/`whoami`/.m2 && \
-sudo docker build -t imqs/java-base:8-test -f ${dockerfileDir}/Dockerfile-local-m2 .
-
-cd $dockerfileDir
+sudo docker build -t imqs/java-base:8-test -f Dockerfile-local-m2 /home/`whoami`/.m2
