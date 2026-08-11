@@ -1,3 +1,4 @@
+# docker build -t imqs/java-base:8 .
 FROM imqs/ubuntu-base
 
 RUN apt-get update \
