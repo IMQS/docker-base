@@ -1,6 +1,22 @@
 # docker build -t imqs/ubuntu-base --build-arg BRANCH=24.04 -f Dockerfile_24 .
 
 ARG BRANCH="24.04"
+
+# Build the KSM LD_PRELOAD library in a separate stage so the compiler
+# toolchain does not end up in the final image
+FROM ubuntu:$BRANCH AS ksm-build
+
+RUN  apt-get update \
+  && apt-get install -y --no-install-recommends \
+  gcc \
+  libc6-dev \
+  make \
+  && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /src
+COPY Makefile ksm.c ./
+RUN make && make install DESTDIR=/out
+
 FROM ubuntu:$BRANCH
 
 RUN  apt-get update \
@@ -20,3 +36,7 @@ COPY wait-for-nc.sh /usr/bin
 
 # Tool to wait for postgres to accept connections
 COPY wait-for-postgres.sh /usr/bin
+
+# LD_PRELOAD library that marks all process memory as mergeable by KSM.
+# Enable it with: ENV LD_PRELOAD=/usr/local/lib/libksm.so
+COPY --from=ksm-build /out/usr/local/lib/libksm.so /usr/local/lib/DO_NOT_USE_ME_IN_PROD_libksm.so

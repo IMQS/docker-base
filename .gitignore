@@ -8,3 +8,4 @@ docker-base.iml
 postgres/10.5/.idea/10.5.iml
 postgres/10.5/.idea/modules.xml
 postgres/10.5/.idea/workspace.xml
+libksm.so
